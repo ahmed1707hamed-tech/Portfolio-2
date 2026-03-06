@@ -1542,23 +1542,31 @@ img {
 
 @media (max-width: 768px) {
     .timeline {
-        padding-top: 0;
+        padding-top: 1rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
     }
 
     .timeline::before,
     .timeline::after,
     .timeline-track {
-        left: 0.9rem;
+        left: 0.75rem;
         transform: none;
     }
 
     .timeline-item {
         margin-left: 0;
         padding-left: 2.5rem;
+        justify-content: flex-start !important;
+        margin-bottom: 40px;
+    }
+
+    .timeline-item:nth-child(even) {
+        justify-content: flex-start !important;
     }
 
     .timeline-node {
-        left: 0.9rem;
+        left: 0.75rem;
         transform: translateX(-50%);
     }
 
@@ -1567,13 +1575,21 @@ img {
     }
 
     .timeline-card {
-        margin-left: 0;
-        margin-right: 0;
-        transform: translateX(0);
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        transform: translateX(0) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .timeline-item:nth-child(even) .timeline-card {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        transform: translateX(0) !important;
     }
 
     .timeline-item:hover .timeline-card {
-        transform: translateY(-3px) scale(1.01);
+        transform: translateY(-3px) scale(1.01) !important;
     }
 }
 
