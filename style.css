@@ -2466,7 +2466,7 @@ footer {
     transition-delay: 0.4s;
 }
 
-/* Responsive */
+/* Responsive Navigation */
 @media (max-width: 768px) {
     .menu-toggle {
         display: block;
@@ -2476,15 +2476,19 @@ footer {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 80%;
+        width: 100%;
+        /* Wider width for mobile */
         height: 100vh;
-        background: var(--clr-bg-dark);
+        background: #0b1220;
+        /* Dark contrast background */
         flex-direction: column;
         justify-content: center;
         align-items: center;
         transition: 0.5s;
         z-index: 1000;
         box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+        padding: 40px;
+        gap: 1rem;
     }
 
     .nav-links.active {
@@ -2492,19 +2496,73 @@ footer {
     }
 
     .nav-links li {
-        margin: 1.5rem 0;
+        margin: 1.2rem 0;
+        width: 100%;
+        text-align: center;
     }
 
     .nav-link {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: #ffffff;
+        text-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
+        display: block;
+        padding: 10px;
     }
 
-    .hero-content {
+    .nav-link:hover {
+        color: var(--clr-accent);
+    }
+
+    /* FIX 1: DUPLICATE IMAGE - Hide hero image on mobile */
+    .hero-image {
+        display: none !important;
+    }
+
+    /* FIX 2: SKILLS CUT OFF - Layout fix for mobile */
+    .skills-circular-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
+        justify-items: center;
+        overflow: visible !important;
+        margin-bottom: 4rem;
+        padding-top: 2rem;
+    }
+
+    .circular-skill-item {
+        flex: 0 0 auto;
+        width: 100%;
+        transform: translateY(15px) scale(0.9);
+    }
+
+    .circle-box {
+        width: 110px;
+        height: 110px;
+        margin: 0 auto;
+        overflow: visible !important;
+    }
+
+    .circle-box svg {
+        transform: rotate(-90deg) scale(0.9);
+    }
+
+    /* FIX 3: SPACING - Increase vertical spacing between sections */
+    section {
+        margin-bottom: 60px;
+        overflow: visible !important;
+    }
+
+    .hero-grid {
         text-align: center;
         padding-top: 6rem;
     }
 
-    .hero-cta {
+    .hero-greeting {
+        justify-content: center;
+    }
+
+    .hero-cta-group {
         justify-content: center;
         flex-wrap: wrap;
     }
@@ -2516,11 +2574,23 @@ footer {
         margin-bottom: 1.5rem;
     }
 
-    .contact-info {
-        flex-direction: column;
-        align-items: flex-start;
+    /* About Section Profile Image Fix */
+    .about-image .image-frame {
+        width: 280px;
+        height: 280px;
+        margin: 0 auto;
+        border-radius: 50%;
     }
 
+    .about-image img {
+        display: block;
+        margin: 0 auto;
+        max-width: 280px;
+        width: 100%;
+        border-radius: 50%;
+    }
+
+    /* Restored Timeline Fixes */
     .timeline::after {
         left: 1.5rem;
     }
