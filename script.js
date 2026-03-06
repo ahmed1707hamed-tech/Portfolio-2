@@ -125,14 +125,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     });
 
-    // 8. DevOps Terminal Typing Effect
+    // 8. Theme Toggle Persistence
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    const icon = themeToggle.querySelector('i');
+
+    const getTheme = () => localStorage.getItem('theme') || 'dark-theme';
+    const setTheme = (theme) => {
+        body.classList.remove('dark-theme', 'light-theme');
+        body.classList.add(theme);
+        localStorage.setItem('theme', theme);
+        icon.className = theme === 'dark-theme' ? 'fas fa-moon' : 'fas fa-sun';
+    };
+
+    setTheme(getTheme());
+
+    themeToggle.addEventListener('click', () => {
+        const newTheme = body.classList.contains('dark-theme') ? 'light-theme' : 'dark-theme';
+        setTheme(newTheme);
+    });
+
+    // 9. DevOps Terminal Sequential Line Reveal Animation
     const modernTerminalEl = document.getElementById('modern-terminal-text');
     if (modernTerminalEl) {
         const terminalScript = [
-            '~/cloud $ whoami',
-            'Ahmed Hamed – Cloud & DevOps Engineer',
-            '',
-            '~/cloud $ cat skills.yml',
             'cloud: AWS (EC2, VPC, IAM, S3)',
             'containers: Docker, Kubernetes',
             'iac: Terraform',
@@ -140,30 +156,34 @@ document.addEventListener('DOMContentLoaded', () => {
             'monitor: Prometheus, Grafana',
             '',
             '~/cloud $ kubectl get pods --all-namespaces',
+            '',
             'NAMESPACE   STATUS   READY   AGE',
             'default     Running  3/3     24h',
             'monitoring  Running  2/2     24h',
             '',
             '~/cloud $ echo "Ready to deploy!"',
             'Ready to deploy!'
-        ].join('\n');
+        ];
 
-        let charIdx = 0;
-        const speed = 25;
+        let lineIdx = 0;
+        const lineDelay = 400; // 300-400ms delay between lines
 
-        const type = () => {
-            if (charIdx <= terminalScript.length) {
-                modernTerminalEl.textContent = terminalScript.slice(0, charIdx);
-                charIdx++;
-                setTimeout(type, speed);
+        const revealLine = () => {
+            if (lineIdx < terminalScript.length) {
+                const line = document.createElement('div');
+                line.className = 'terminal-line';
+                line.textContent = terminalScript[lineIdx] === '' ? '\u00A0' : terminalScript[lineIdx];
+                modernTerminalEl.appendChild(line);
+                lineIdx++;
+                setTimeout(revealLine, lineDelay);
             }
         };
 
-        // Trigger typing after a small delay
-        setTimeout(type, 1000);
+        // Trigger reveal after a small delay
+        setTimeout(revealLine, 1000);
     }
 
-    // 9. Floating Particles Generation
+    // 10. Floating Particles Generation
     const particlesContainer = document.getElementById('particles');
     if (particlesContainer) {
         const particleCount = 20;
@@ -190,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 10. Skills progress bars (Linear and Circular)
+    // 11. Skills progress bars (Linear and Circular)
     const skillCards = document.querySelectorAll('.skill-card');
     const circularSkills = document.querySelectorAll('.circular-skill-item');
 
@@ -209,15 +229,21 @@ document.addEventListener('DOMContentLoaded', () => {
                         bar.style.width = `${percent}%`;
                     });
                 }
-                // Handle circular progress rings
+                // Handle circular progress rings (Apple-style Staggered Reveal)
                 else if (item.classList.contains('circular-skill-item')) {
-                    const circle = item.querySelector('.progress-ring-circle');
-                    const percent = parseFloat(item.dataset.percent || '0');
-                    const radius = circle.r.baseVal.value;
-                    const circumference = 2 * Math.PI * radius;
+                    const itemsArr = Array.from(circularSkills);
+                    const idx = itemsArr.indexOf(item);
 
-                    const offset = circumference - (percent / 100) * circumference;
-                    circle.style.strokeDashoffset = offset;
+                    setTimeout(() => {
+                        item.classList.add('reveal');
+                        const circle = item.querySelector('.progress-ring-circle');
+                        const percent = parseFloat(item.dataset.percent || '0');
+                        const radius = circle.r.baseVal.value;
+                        const circumference = 2 * Math.PI * radius;
+
+                        const offset = circumference - (percent / 100) * circumference;
+                        circle.style.strokeDashoffset = offset;
+                    }, idx * 180); // Staggered delay (180ms)
                 }
 
                 observer.unobserve(item);

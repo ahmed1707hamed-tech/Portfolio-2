@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="dark-mode">
+<body class="dark-theme">
     <div id="loader" class="loader-wrapper">
         <div class="loader"></div>
     </div>
@@ -43,10 +43,15 @@
                     <li><a href="#journey" class="nav-link">Journey</a></li>
                     <li><a href="#contact" class="nav-link btn-small">Contact</a></li>
                 </ul>
-                <div class="menu-toggle" id="mobile-menu">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
+                <div class="menu-controls">
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="menu-toggle" id="mobile-menu">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -61,6 +66,13 @@
                 </div>
                 <div class="container">
                     <div class="hero-grid">
+                        <!-- Hero Image (Mobile only via CSS) -->
+                        <div class="hero-image animate-up">
+                            <div class="hero-image-frame">
+                                <img src="ahmed (2).jpeg" alt="Ahmed Hamed">
+                            </div>
+                        </div>
+
                         <!-- Left Side: Content -->
                         <div class="hero-left animate-up">
                             <span class="hero-greeting">Hello, I'm</span>
