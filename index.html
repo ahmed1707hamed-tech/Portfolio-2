@@ -1085,7 +1085,9 @@
                                     <div class="terminal-status">STATUS: <span class="status-text">READY</span></div>
                                 </div>
                                 <div class="terminal-body" id="contact-terminal-body">
-                                    <form class="devops-form" id="contact-form-internal">
+                                    <form class="devops-form" id="contact-form-internal" name="contact" method="POST"
+                                        data-netlify="true">
+                                        <input type="hidden" name="form-name" value="contact">
                                         <div class="form-row">
                                             <div class="form-group">
                                                 <label for="name-dev"><span class="cmd-prefix">$</span> Name</label>

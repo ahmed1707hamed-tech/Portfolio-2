@@ -261,6 +261,14 @@ document.addEventListener('DOMContentLoaded', () => {
         devopsForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
+            // Submit form to Netlify via AJAX
+            const formData = new FormData(devopsForm);
+            fetch("/", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString(),
+            }).catch(error => console.error('Form submission error:', error));
+
             // Start Terminal Simulation
             devopsForm.style.display = 'none';
             logPanel.classList.add('active');
